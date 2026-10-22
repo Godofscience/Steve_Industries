@@ -1,501 +1,1462 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Stewart Company | Tech of Future</title>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Three.js (CDN) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steve Industries — A John Stewart Company | Intelligent Solutions. Infinite Dimensions.</title>
+  <meta name="description" content="Steve Industries (A John Stewart Company) — Multi-disciplinary luxury-grade editorial tech enterprise bridging artificial intelligence, autonomous robotics, spatial 3D visualization, and commercial modernization." />
+  <link rel="canonical" href="https://steveindustries.com" />
+  <link rel="icon" type="image/png" href="./logo.png" />
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            dark: '#0f172a',    // Deep slate
-                            accent: '#2563eb',  // Tech Blue
-                            light: '#f8fafc',   // Off-white background
-                            gray: '#64748b'     // Muted text
-                        }
-                    }
-                }
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            beige: {
+              DEFAULT: '#EDECE6',
+              warm: '#E4E2D8',
+              soft: '#F5F4F0'
+            },
+            amethyst: {
+              DEFAULT: '#3B0A6B',
+              deep: '#270648',
+              light: '#52148E',
+              muted: '#5D3A82'
+            },
+            signal: {
+              DEFAULT: '#E10600',
+              hover: '#BE0500',
+              soft: 'rgba(225, 6, 0, 0.1)'
+            },
+            silver: {
+              DEFAULT: '#C0C0C0',
+              light: '#E2E4E9',
+              dark: '#686A70'
             }
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          boxShadow: {
+            'amethyst-card': '0 14px 34px -10px rgba(59, 10, 107, 0.12)',
+            'amethyst-hover': '0 22px 45px -12px rgba(59, 10, 107, 0.24)',
+            'signal-cta': '0 10px 26px -4px rgba(225, 6, 0, 0.42)',
+            'signal-cta-hover': '0 14px 32px -2px rgba(225, 6, 0, 0.58)'
+          }
         }
-    </script>
+      }
+    };
+  </script>
 
-    <style>
-        body {
-            background-color: #f8fafc;
-            color: #0f172a;
-            overflow-x: hidden;
-        }
+  <!-- Three.js & Lucide Icons via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-        /* Scroll Animations */
-        .animate-hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .animate-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  <style>
+    :root {
+      --bg-beige: #EDECE6;
+      --royal-amethyst: #3B0A6B;
+      --signal-red: #E10600;
+      --porcelain-white: #FFFFFF;
+      --moonlit-silver: #C0C0C0;
+    }
 
-        /* ThreeJS Canvas Container */
-        #hero-canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none; /* Let clicks pass through to content */
-            opacity: 0.6; /* Subtle integration */
-        }
-        
-        /* Glassmorphism utilities */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-    </style>
+    body {
+      background-color: #EDECE6;
+      color: #3B0A6B;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Editorial Architectural Grid on Warm Beige */
+    .bg-editorial-grid {
+      background-color: #EDECE6;
+      background-image:
+        linear-gradient(to right, rgba(59, 10, 107, 0.055) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(59, 10, 107, 0.055) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    /* Frosted Glass Header over #EDECE6 */
+    .frosted-nav {
+      background: rgba(237, 236, 230, 0.84);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1.5px solid rgba(59, 10, 107, 0.18);
+    }
+
+    /* Elevated Porcelain White / Silver Card with #3B0A6B Border */
+    .editorial-card {
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.96) 0%, rgba(246, 245, 242, 0.92) 100%);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(59, 10, 107, 0.28);
+      box-shadow: 0 14px 34px -10px rgba(59, 10, 107, 0.1);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .editorial-card:hover {
+      border-color: #3B0A6B;
+      box-shadow: 0 22px 45px -12px rgba(59, 10, 107, 0.22), 0 0 0 1px #3B0A6B;
+      transform: translateY(-4px);
+    }
+
+    /* Logo Blending Utilities (Uploaded PNG has white background, multiply blends seamlessly on light surfaces) */
+    .logo-blend-light {
+      mix-blend-mode: multiply;
+    }
+
+    /* 3D Perspective Tilt Showcase Cards */
+    .tilt-card-wrapper {
+      perspective: 1200px;
+    }
+
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+      will-change: transform;
+    }
+
+    .tilt-card-inner {
+      transform: translateZ(22px);
+    }
+
+    /* Hide scrollbar on horizontal showcase track */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #EDECE6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3B0A6B;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #E10600;
+    }
+  </style>
 </head>
-<body class="antialiased selection:bg-brand-accent selection:text-white">
+<body class="bg-editorial-grid text-amethyst selection:bg-signal selection:text-white antialiased">
 
-    <!-- Navigation -->
-    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <!-- Geometric Logo SVG mimicking the provided image -->
-                    <svg class="w-10 h-10 text-brand-dark group-hover:text-brand-accent transition-colors" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="miter">
-                        <path d="M20,50 L50,20 L80,50 L50,80 Z" />
-                        <path d="M35,35 L65,65" />
-                        <path d="M65,35 L35,65" />
-                        <rect x="25" y="25" width="50" height="50" transform="rotate(45 50 50)" />
-                    </svg>
-                    <div class="flex flex-col">
-                        <span class="text-xl font-bold tracking-tight leading-none">JOHN STEWART</span>
-                        <span class="text-[0.65rem] font-semibold tracking-[0.2em] text-brand-gray uppercase mt-1">Company</span>
-                    </div>
-                </a>
-                
-                <!-- Desktop Menu -->
-                <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="#about" class="text-sm font-medium text-brand-dark hover:text-brand-accent transition-colors">About</a>
-                    <a href="#expertise" class="text-sm font-medium text-brand-dark hover:text-brand-accent transition-colors">Expertise</a>
-                    <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-accent transition-colors">Contact</a>
-                    <a href="#contact" class="bg-brand-dark hover:bg-black text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                        Get Started
-                    </a>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-brand-dark p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+  <!-- =====================================================================
+       1. HEADER & NAVIGATION
+       ===================================================================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 frosted-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Left: Uploaded Interlocking Logo Emblem + Brand Lockup -->
+      <a href="#hero" class="flex items-center gap-3.5 group focus:outline-none">
+        <div class="relative w-14 h-12 flex items-center justify-center rounded-lg bg-white border-2 border-amethyst/25 group-hover:border-amethyst transition-all shadow-sm overflow-hidden px-1">
+          <img
+            src="./logo.png"
+            alt="Steve Industries & John Stewart Company Interlocking Emblem"
+            class="w-full h-full object-contain logo-blend-light scale-125"
+          />
+          <span class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-signal"></span>
         </div>
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-lg sm:text-xl tracking-wider text-amethyst group-hover:text-signal transition-colors leading-none">
+            STEVE INDUSTRIES
+          </span>
+          <span class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-amethyst/75 mt-1 font-medium">
+            A John Stewart Company
+          </span>
+        </div>
+      </a>
+
+      <!-- Right: Navigation Links in #3B0A6B + "Initiate Consultation" Button in #E10600 -->
+      <div class="flex items-center gap-2 lg:gap-6">
+        <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Primary Navigation">
+          <a href="#ecosystem" class="px-3 py-2 text-sm font-semibold text-amethyst hover:text-signal rounded-md transition-colors relative group">
+            Ecosystem
+            <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-signal scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          </a>
+          <a href="#pillars" class="px-3 py-2 text-sm font-semibold text-amethyst hover:text-signal rounded-md transition-colors relative group">
+            Core Pillars
+            <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-signal scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          </a>
+          <a href="#showcase" class="px-3 py-2 text-sm font-semibold text-amethyst hover:text-signal rounded-md transition-colors relative group">
+            3D Showcase
+            <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-signal scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          </a>
+          <a href="#leadership" class="px-3 py-2 text-sm font-semibold text-amethyst hover:text-signal rounded-md transition-colors relative group">
+            Leadership
+            <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-signal scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          </a>
+          <a href="#contact" class="px-3 py-2 text-sm font-semibold text-amethyst hover:text-signal rounded-md transition-colors relative group">
+            Contact
+            <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-signal scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          </a>
+        </nav>
+
+        <a href="#intake-form" class="hidden sm:inline-flex items-center gap-2 bg-signal hover:bg-signal-hover text-white font-display font-semibold text-xs sm:text-sm tracking-wide uppercase px-5 py-2.5 rounded-md shadow-signal-cta hover:shadow-signal-cta-hover transition-all duration-200 active:scale-95">
+          <span>Initiate Consultation</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" type="button" class="md:hidden inline-flex items-center justify-center p-2.5 rounded-md text-amethyst hover:bg-amethyst/10 border border-amethyst/25 focus:outline-none" aria-label="Toggle Menu">
+          <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+          <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-beige/95 backdrop-blur-xl border-b border-amethyst/20 px-4 pt-3 pb-6 space-y-2">
+      <a href="#ecosystem" class="mobile-nav-link block px-4 py-2.5 rounded-md text-base font-semibold text-amethyst hover:bg-amethyst/5">Ecosystem</a>
+      <a href="#pillars" class="mobile-nav-link block px-4 py-2.5 rounded-md text-base font-semibold text-amethyst hover:bg-amethyst/5">Core Pillars</a>
+      <a href="#showcase" class="mobile-nav-link block px-4 py-2.5 rounded-md text-base font-semibold text-amethyst hover:bg-amethyst/5">3D Showcase</a>
+      <a href="#leadership" class="mobile-nav-link block px-4 py-2.5 rounded-md text-base font-semibold text-amethyst hover:bg-amethyst/5">Leadership</a>
+      <a href="#contact" class="mobile-nav-link block px-4 py-2.5 rounded-md text-base font-semibold text-amethyst hover:bg-amethyst/5">Contact</a>
+      <div class="pt-3 border-t border-amethyst/15">
+        <a href="#intake-form" class="mobile-nav-link w-full inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover text-white font-display font-semibold text-sm uppercase px-5 py-3 rounded-md shadow-signal-cta">
+          <span>Initiate Consultation</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       2. HERO SECTION (INTERACTIVE 3D STAGE)
+       ===================================================================== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden border-b border-amethyst/15">
+    
+    <!-- Three.js Interactive 3D Canvas Stage (Deep Amethyst #3B0A6B & Signal Red #E10600 wireframes) -->
+    <div id="hero-canvas-container" class="absolute inset-0 z-0 cursor-grab active:cursor-grabbing" aria-hidden="true"></div>
+
+    <!-- Subtle Editorial Radial Vignette over Warm Beige -->
+    <div class="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_center,rgba(237,236,230,0.25)_0%,rgba(237,236,230,0.88)_85%)]"></div>
+
+    <!-- Top Telemetry Bar -->
+    <div class="absolute top-24 left-6 right-6 z-10 hidden lg:flex items-center justify-between pointer-events-none text-[11px] font-mono text-amethyst/70 uppercase tracking-widest">
+      <div class="flex items-center gap-3">
+        <span class="inline-block w-2 h-2 rounded-full bg-signal"></span>
+        <span>SYS.STAGE // STEVE_INDUSTRIES_3D</span>
+        <span class="text-amethyst/30">|</span>
+        <span>PARENT: JOHN STEWART COMPANY</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span id="hud-coords">ORBIT: X:0.00 Y:0.00</span>
+        <span class="text-amethyst/30">|</span>
+        <span class="text-amethyst font-semibold">INTERACTIVE 3D WIREFRAME [HOVER / DRAG]</span>
+      </div>
+    </div>
+
+    <!-- Hero Foreground Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <!-- Primary Logo Emblem & Parent Lockup Badge -->
+      <div class="inline-flex flex-col items-center mb-6">
+        <div class="w-28 h-20 sm:w-32 sm:h-22 rounded-2xl bg-white/95 border-2 border-amethyst shadow-amethyst-card flex items-center justify-center p-2 mb-4">
+          <img
+            src="./logo.png"
+            alt="Steve Industries & John Stewart Company Primary Emblem"
+            class="w-full h-full object-contain logo-blend-light scale-110"
+          />
+        </div>
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 border border-amethyst/35 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-signal animate-pulse"></span>
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-amethyst font-semibold">
+            Steve Industries — A John Stewart Company
+          </span>
+        </div>
+      </div>
+
+      <!-- Large Title in #3B0A6B -->
+      <h1 class="font-display font-bold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-amethyst uppercase leading-[0.95]">
+        STEVE INDUSTRIES
+      </h1>
+
+      <!-- Official Tagline -->
+      <p class="mt-5 font-display italic font-medium text-xl sm:text-2xl lg:text-3xl text-amethyst/85 tracking-wide">
+        &ldquo;Intelligent Solutions. <span class="text-amethyst not-italic font-bold border-b-2 border-signal pb-0.5">Infinite Dimensions.</span>&rdquo;
+      </p>
+
+      <!-- Brief Subtext -->
+      <p class="mt-6 max-w-3xl mx-auto text-base sm:text-lg lg:text-xl text-amethyst/80 font-normal leading-relaxed">
+        A multi-disciplinary operating enterprise under the <strong class="text-amethyst font-semibold">John Stewart Company</strong>—bridging frontier artificial intelligence, autonomous robotics, photorealistic 3D visualization, and strategic retail &amp; commercial modernization.
+      </p>
+
+      <!-- Primary & Secondary CTAs -->
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+        <a href="#pillars" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-signal hover:bg-signal-hover text-white font-display font-semibold text-sm sm:text-base uppercase tracking-wider px-8 py-4 rounded-md shadow-signal-cta hover:shadow-signal-cta-hover transition-all duration-200 active:scale-95">
+          <span>Explore Core Pillars</span>
+          <i data-lucide="layers" class="w-5 h-5"></i>
+        </a>
+        <a href="#intake-form" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white hover:bg-beige-soft text-amethyst border-2 border-amethyst font-display font-semibold text-sm sm:text-base uppercase tracking-wider px-8 py-4 rounded-md shadow-amethyst-card transition-all duration-200 active:scale-95">
+          <span>Initiate Consultation</span>
+          <i data-lucide="arrow-up-right" class="w-5 h-5 text-signal"></i>
+        </a>
+      </div>
+
+      <!-- Dual Brand Architecture Strip -->
+      <div id="ecosystem" class="mt-16 pt-10 border-t border-amethyst/20 grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
+        <!-- Steve Industries Card -->
+        <div class="editorial-card rounded-xl p-5 flex items-center gap-4">
+          <div class="w-16 h-14 rounded-lg bg-white border border-amethyst/25 flex items-center justify-center p-1.5 shrink-0">
+            <img src="./logo.png" alt="Steve Industries Logo" class="w-full h-full object-contain logo-blend-light scale-125" />
+          </div>
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-signal font-semibold">Operating Enterprise</div>
+            <div class="font-display font-bold text-lg text-amethyst">STEVE INDUSTRIES</div>
+            <p class="text-xs text-amethyst/75 mt-0.5">Frontier AI, Robotics R&amp;D, Spatial 3D &amp; Venture Modernization.</p>
+          </div>
+        </div>
+
+        <!-- John Stewart Company Card -->
+        <div class="editorial-card rounded-xl p-5 flex items-center gap-4">
+          <div class="w-16 h-14 rounded-lg bg-white border border-amethyst/25 flex items-center justify-center p-1.5 shrink-0">
+            <img src="./logo.png" alt="John Stewart Company Logo" class="w-full h-full object-contain logo-blend-light scale-125" />
+          </div>
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-amethyst/70 font-semibold">Parent Entity</div>
+            <div class="font-display font-bold text-lg text-amethyst">JOHN STEWART COMPANY</div>
+            <p class="text-xs text-amethyst/75 mt-0.5">Executive governance, capital stewardship &amp; multi-disciplinary strategy.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       3. CORE PILLARS (BUILD -> VISUALIZE -> SCALE)
+       ===================================================================== -->
+  <section id="pillars" class="relative py-24 lg:py-32 bg-beige border-b border-amethyst/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Heading -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amethyst text-beige font-mono text-xs uppercase tracking-[0.2em] mb-4">
+            <span class="w-2 h-2 rounded-full bg-signal"></span>
+            <span>Build &rarr; Visualize &rarr; Scale</span>
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-amethyst tracking-tight">
+            The Three Core Pillars
+          </h2>
+        </div>
+        <p class="text-amethyst/80 text-base sm:text-lg max-w-md">
+          Three elevated operational divisions engineered with industrial precision to take enterprises from deep-tech R&amp;D to market scale.
+        </p>
+      </div>
+
+      <!-- Three Elevated White/Silver Cards with #3B0A6B Borders -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 shadow-xl">
-            <div class="flex flex-col space-y-4 mt-4">
-                <a href="#about" class="text-base font-medium text-brand-dark">About</a>
-                <a href="#expertise" class="text-base font-medium text-brand-dark">Expertise</a>
-                <a href="#contact" class="text-base font-medium text-brand-dark">Contact</a>
+        <!-- Pillar 1: Frontier Engineering & R&D -->
+        <article class="editorial-card rounded-xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <div class="relative h-56 overflow-hidden bg-amethyst-deep border-b border-amethyst/25">
+              <img
+                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=85"
+                alt="Frontier Engineering and Robotics R&D"
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-amethyst/80 via-amethyst/20 to-transparent"></div>
+              <div class="absolute top-4 left-4 px-3 py-1 rounded bg-amethyst text-white font-mono text-xs font-semibold tracking-wider">
+                01 // BUILD
+              </div>
+              <div class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-signal text-white flex items-center justify-center shadow-md">
+                <i data-lucide="bot" class="w-5 h-5"></i>
+              </div>
             </div>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-brand-light">
-        <!-- ThreeJS Canvas -->
-        <div id="hero-canvas-container">
-            <canvas id="hero-canvas"></canvas>
+            <div class="p-7">
+              <h3 class="font-display font-bold text-2xl text-amethyst group-hover:text-signal transition-colors">
+                Frontier Engineering &amp; R&amp;D
+              </h3>
+              <p class="mt-3 text-amethyst/80 text-sm sm:text-base leading-relaxed">
+                Autonomous systems, custom computer vision pipelines, robotics simulation, and low-latency edge-AI interaction engineered for mission-critical environments.
+              </p>
+
+              <ul class="mt-6 space-y-2.5 text-xs sm:text-sm font-mono text-amethyst/90">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Autonomous Systems &amp; Robotics Simulation</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Neural Computer Vision &amp; Object Telemetry</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Real-Time Edge-AI Hardware Interaction</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="px-7 pb-6 pt-4 border-t border-amethyst/15 bg-white/60 flex items-center justify-between">
+            <span class="font-mono text-xs text-amethyst/70 uppercase font-semibold">DIV // AI_ROBOTICS</span>
+            <a href="#intake-form" class="inline-flex items-center gap-1.5 text-xs font-display font-bold uppercase tracking-wider text-amethyst group-hover:text-signal transition-colors">
+              <span>Initiate R&amp;D</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Pillar 2: Spatial 3D Engineering -->
+        <article class="editorial-card rounded-xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <div class="relative h-56 overflow-hidden bg-amethyst-deep border-b border-amethyst/25">
+              <img
+                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=85"
+                alt="Spatial 3D Engineering and Digital Twins"
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-amethyst/80 via-amethyst/20 to-transparent"></div>
+              <div class="absolute top-4 left-4 px-3 py-1 rounded bg-amethyst text-white font-mono text-xs font-semibold tracking-wider">
+                02 // VISUALIZE
+              </div>
+              <div class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-signal text-white flex items-center justify-center shadow-md">
+                <i data-lucide="box" class="w-5 h-5"></i>
+              </div>
+            </div>
+
+            <div class="p-7">
+              <h3 class="font-display font-bold text-2xl text-amethyst group-hover:text-signal transition-colors">
+                Spatial 3D Engineering
+              </h3>
+              <p class="mt-3 text-amethyst/80 text-sm sm:text-base leading-relaxed">
+                Photorealistic 3D product animations, precision virtual modeling, and interactive digital twins that transform industrial concepts into tangible visual authority.
+              </p>
+
+              <ul class="mt-6 space-y-2.5 text-xs sm:text-sm font-mono text-amethyst/90">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Photorealistic 3D Product Animations</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>CAD-to-Cinema Virtual Modeling</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Interactive WebGL &amp; Industrial Digital Twins</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="px-7 pb-6 pt-4 border-t border-amethyst/15 bg-white/60 flex items-center justify-between">
+            <span class="font-mono text-xs text-amethyst/70 uppercase font-semibold">DIV // SPATIAL_3D</span>
+            <a href="#intake-form" class="inline-flex items-center gap-1.5 text-xs font-display font-bold uppercase tracking-wider text-amethyst group-hover:text-signal transition-colors">
+              <span>Commission 3D</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Pillar 3: Venture Modernization & Advisory -->
+        <article class="editorial-card rounded-xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <div class="relative h-56 overflow-hidden bg-amethyst-deep border-b border-amethyst/25">
+              <img
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85"
+                alt="Venture Modernization and Advisory"
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-amethyst/80 via-amethyst/20 to-transparent"></div>
+              <div class="absolute top-4 left-4 px-3 py-1 rounded bg-amethyst text-white font-mono text-xs font-semibold tracking-wider">
+                03 // SCALE
+              </div>
+              <div class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-signal text-white flex items-center justify-center shadow-md">
+                <i data-lucide="trending-up" class="w-5 h-5"></i>
+              </div>
+            </div>
+
+            <div class="p-7">
+              <h3 class="font-display font-bold text-2xl text-amethyst group-hover:text-signal transition-colors">
+                Venture Modernization &amp; Advisory
+              </h3>
+              <p class="mt-3 text-amethyst/80 text-sm sm:text-base leading-relaxed">
+                End-to-end brand elevation, physical retail store turnarounds, and high-conviction commercial strategy tailored for startups and struggling businesses.
+              </p>
+
+              <ul class="mt-6 space-y-2.5 text-xs sm:text-sm font-mono text-amethyst/90">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Brand Elevation &amp; Corporate Identity</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Physical Retail Store Turnarounds</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-signal"></span>
+                  <span>Commercial Strategy for Startups &amp; Ventures</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="px-7 pb-6 pt-4 border-t border-amethyst/15 bg-white/60 flex items-center justify-between">
+            <span class="font-mono text-xs text-amethyst/70 uppercase font-semibold">DIV // ADVISORY</span>
+            <a href="#intake-form" class="inline-flex items-center gap-1.5 text-xs font-display font-bold uppercase tracking-wider text-amethyst group-hover:text-signal transition-colors">
+              <span>Request Audit</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       4. INTERACTIVE 3D CARD SHOWCASE
+       ===================================================================== -->
+  <section id="showcase" class="relative py-24 lg:py-32 bg-beige-warm/60 border-b border-amethyst/15 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Header & Carousel Controls -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amethyst text-beige font-mono text-xs uppercase tracking-[0.2em] mb-4">
+            <span class="w-2 h-2 rounded-full bg-signal"></span>
+            <span>Interactive Spatial Modules</span>
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-amethyst tracking-tight">
+            Interactive 3D Card Showcase
+          </h2>
+          <p class="mt-3 text-amethyst/80 text-base max-w-2xl">
+            Move your cursor across any card to engage real-time 3D perspective tilt, or slide horizontally through our practical engineering and commercial capabilities.
+          </p>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-reveal animate-hidden">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-gray-200 mb-8 mx-auto">
-                <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
-                <span class="text-xs font-bold tracking-widest uppercase text-brand-gray">Tech of Future</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-brand-dark mb-6">
-                JOHN STEWART <br/> 
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-dark to-brand-gray">COMPANY</span>
-            </h1>
-            
-            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-brand-gray leading-relaxed font-light">
-                Pioneering the intersection of artificial intelligence, advanced robotics, and strategic branding to forge the enterprises of tomorrow.
-            </p>
-            
-            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#expertise" class="px-8 py-4 bg-brand-dark text-white rounded-full font-medium hover:bg-black transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    Explore Solutions
-                </a>
-                <a href="#about" class="px-8 py-4 bg-white text-brand-dark border border-gray-200 rounded-full font-medium hover:bg-gray-50 transition-all shadow-sm hover:shadow">
-                    Discover Our Vision
-                </a>
-            </div>
+        <!-- Slide Navigation Buttons -->
+        <div class="flex items-center gap-3 self-start md:self-end">
+          <span class="font-mono text-xs text-amethyst/70 mr-2 hidden sm:inline">SLIDE // 01 — 04</span>
+          <button id="slide-prev" type="button" class="w-11 h-11 rounded-lg bg-white border-2 border-amethyst/40 hover:border-amethyst hover:bg-amethyst hover:text-white text-amethyst flex items-center justify-center transition-all active:scale-95" aria-label="Previous Slide">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <button id="slide-next" type="button" class="w-11 h-11 rounded-lg bg-white border-2 border-amethyst/40 hover:border-amethyst hover:bg-amethyst hover:text-white text-amethyst flex items-center justify-center transition-all active:scale-95" aria-label="Next Slide">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
         </div>
+      </div>
+
+      <!-- Sliding Horizontal Carousel with 3D Hover-Tilt Cards -->
+      <div id="showcase-track" class="flex gap-7 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-6 pt-2">
         
-        <!-- Scroll Down Indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce z-10">
-            <span class="text-xs font-semibold text-brand-gray tracking-widest uppercase mb-2">Scroll</span>
-            <svg class="w-4 h-4 text-brand-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="scroll-reveal animate-hidden">
-                    <h2 class="text-sm font-bold tracking-widest text-brand-accent uppercase mb-3">About Us</h2>
-                    <h3 class="text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tight mb-6">
-                        An All-in-One <br> Innovation Hub.
-                    </h3>
-                    <p class="text-lg text-brand-gray mb-6 leading-relaxed">
-                        Led by Founder & CEO <strong>John Stewart</strong>, our company operates at the bleeding edge of technological advancement and market strategy. We are not just a development firm; we are a comprehensive partner for the future.
-                    </p>
-                    <p class="text-lg text-brand-gray leading-relaxed mb-8">
-                        We seamlessly blend R&D in robotics and AI with advanced 3D visualization. Beyond technology, we provide advisory and strategic branding implementation specifically designed to revitalize struggling startups and stores, turning visionary concepts into market-dominating realities.
-                    </p>
-                    
-                    <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
-                        <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center border border-gray-200">
-                            <svg class="w-6 h-6 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <div>
-                            <p class="text-sm text-brand-gray">Directed by</p>
-                            <p class="font-bold text-brand-dark">John Stewart, Founder & CEO</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative scroll-reveal animate-hidden delay-200">
-                    <!-- Abstract geometric design representing the company's multifaceted nature -->
-                    <div class="aspect-square bg-brand-light rounded-3xl overflow-hidden relative border border-gray-100 shadow-2xl">
-                        <div class="absolute inset-0 bg-gradient-to-br from-brand-accent/5 to-transparent"></div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-[1px] border-brand-accent/10 rounded-full animate-[spin_30s_linear_infinite]"></div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] border-[1px] border-brand-accent/20 rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
-                        
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="grid grid-cols-2 gap-4 w-2/3 h-2/3">
-                                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center p-6"><span class="font-bold text-brand-dark text-lg">AI</span></div>
-                                <div class="bg-brand-dark rounded-2xl shadow-sm flex items-center justify-center p-6"><span class="font-bold text-white text-lg">R&D</span></div>
-                                <div class="bg-brand-accent rounded-2xl shadow-sm flex items-center justify-center p-6"><span class="font-bold text-white text-lg">3D</span></div>
-                                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center p-6"><span class="font-bold text-brand-dark text-lg">Brand</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Card 01 -->
+        <div class="tilt-card-wrapper min-w-[88%] sm:min-w-[450px] lg:min-w-[500px] snap-start">
+          <div class="tilt-card editorial-card rounded-xl overflow-hidden h-full flex flex-col justify-between p-1.5">
+            <div class="relative h-60 rounded-lg overflow-hidden bg-amethyst-deep">
+              <img
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85"
+                alt="Vision-Language-Action Robotics Systems"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-amethyst/90 via-amethyst/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded bg-signal text-white font-mono text-[11px] font-semibold">CAPABILITY // 01</span>
+                <span class="px-2.5 py-1 rounded bg-white/95 text-amethyst font-mono text-[11px] font-semibold">VLA-ROBOTICS</span>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between font-mono text-[11px] text-beige">
+                <span>LATENCY: &lt;12ms EDGE</span>
+                <span>DOF: 6-AXIS / HUMANOID</span>
+              </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Expertise Section -->
-    <section id="expertise" class="py-24 bg-brand-light relative border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 scroll-reveal animate-hidden">
-                <h2 class="text-sm font-bold tracking-widest text-brand-accent uppercase mb-3">Our Expertise</h2>
-                <h3 class="text-3xl md:text-5xl font-extrabold text-brand-dark tracking-tight">
-                    Comprehensive Future Solutions
+            <div class="tilt-card-inner p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-2xl text-amethyst">
+                  Vision-Language-Action Robotics Systems
                 </h3>
+                <p class="mt-3 text-amethyst/80 text-sm sm:text-base leading-relaxed">
+                  Embodied multimodal AI agents that interpret natural commands, perceive complex 3D workspaces, and execute dexterous physical manipulation tasks autonomously.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-amethyst/15 flex items-center justify-between">
+                <span class="font-mono text-xs text-amethyst/75 font-medium">PyTorch &bull; ROS2 &bull; Isaac Sim</span>
+                <a href="#intake-form" class="font-mono text-xs font-bold text-signal hover:underline uppercase tracking-wider">Deploy &rarr;</a>
+              </div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Service 1: Robotics -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group scroll-reveal animate-hidden">
-                    <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 text-brand-dark group-hover:bg-brand-dark group-hover:text-white transition-colors">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </div>
-                    <h4 class="text-2xl font-bold text-brand-dark mb-4">Robotics & R&D</h4>
-                    <p class="text-brand-gray leading-relaxed mb-6">
-                        Pioneering physical and digital integration. We specialize in software simulation, advanced vision-based gesture tracking, and deploying comprehensive digital demonstration platforms such as <strong>Project A.E.G.I.S.</strong>
-                    </p>
-                    <ul class="space-y-2 text-sm font-medium text-brand-dark">
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Software Simulation</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Vision-Based Gesture Tracking</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Platform Deployment</li>
-                    </ul>
-                </div>
-
-                <!-- Service 2: AI -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group scroll-reveal animate-hidden delay-100">
-                    <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 text-brand-dark group-hover:bg-brand-dark group-hover:text-white transition-colors">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h4 class="text-2xl font-bold text-brand-dark mb-4">Artificial Intelligence</h4>
-                    <p class="text-brand-gray leading-relaxed mb-6">
-                        Harnessing data for actionable intelligence. We build robust architectures for custom object detection, intricate predictive modeling, and deep data analytics tailored to your industry.
-                    </p>
-                    <ul class="space-y-2 text-sm font-medium text-brand-dark">
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Custom Object Detection</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Predictive Modeling</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Big Data Analytics</li>
-                    </ul>
-                </div>
-
-                <!-- Service 3: 3D Vis -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group scroll-reveal animate-hidden">
-                    <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 text-brand-dark group-hover:bg-brand-dark group-hover:text-white transition-colors">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                    </div>
-                    <h4 class="text-2xl font-bold text-brand-dark mb-4">Advanced 3D Visualization</h4>
-                    <p class="text-brand-gray leading-relaxed mb-6">
-                        Bringing concepts to life before they are built. Our studio provides high-quality product rendering, stunning architectural visualization, and immersive visual animations.
-                    </p>
-                    <ul class="space-y-2 text-sm font-medium text-brand-dark">
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> High-Fidelity Product Rendering</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Architectural Visualization</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Dynamic Visual Animation</li>
-                    </ul>
-                </div>
-
-                <!-- Service 4: Marketing -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group scroll-reveal animate-hidden delay-100">
-                    <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 text-brand-dark group-hover:bg-brand-dark group-hover:text-white transition-colors">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
-                    </div>
-                    <h4 class="text-2xl font-bold text-brand-dark mb-4">Marketing & Branding Advisory</h4>
-                    <p class="text-brand-gray leading-relaxed mb-6">
-                        Revitalizing businesses for the modern era. We offer strategic branding, bespoke graphic assets, and expert advisory services tailored specifically to uplift struggling startups and retail stores for future implementation.
-                    </p>
-                    <ul class="space-y-2 text-sm font-medium text-brand-dark">
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Strategic Brand Revitalization</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Graphic Asset Creation</li>
-                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> Startup & Retail Advisory</li>
-                    </ul>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Contact & Footer Section -->
-    <section id="contact" class="bg-brand-dark text-white border-t-8 border-brand-accent pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16 scroll-reveal animate-hidden">
-                <!-- Branding Col -->
+        <!-- Card 02 -->
+        <div class="tilt-card-wrapper min-w-[88%] sm:min-w-[450px] lg:min-w-[500px] snap-start">
+          <div class="tilt-card editorial-card rounded-xl overflow-hidden h-full flex flex-col justify-between p-1.5">
+            <div class="relative h-60 rounded-lg overflow-hidden bg-amethyst-deep">
+              <img
+                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=85"
+                alt="Autonomous Computer Vision & Object Tracking"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-amethyst/90 via-amethyst/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded bg-signal text-white font-mono text-[11px] font-semibold">CAPABILITY // 02</span>
+                <span class="px-2.5 py-1 rounded bg-white/95 text-amethyst font-mono text-[11px] font-semibold">NEURAL-VISION</span>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between font-mono text-[11px] text-beige">
+                <span>PRECISION: 99.4% mAP</span>
+                <span>STREAM: MULTI-CAM 120FPS</span>
+              </div>
+            </div>
+
+            <div class="tilt-card-inner p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-2xl text-amethyst">
+                  Autonomous Computer Vision &amp; Object Tracking
+                </h3>
+                <p class="mt-3 text-amethyst/80 text-sm sm:text-base leading-relaxed">
+                  High-speed visual inspection pipelines, spatial customer analytics, and real-time defect &amp; object tracking deployed on edge hardware across industrial and retail spaces.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-amethyst/15 flex items-center justify-between">
+                <span class="font-mono text-xs text-amethyst/75 font-medium">TensorRT &bull; OpenCV &bull; Edge NPU</span>
+                <a href="#intake-form" class="font-mono text-xs font-bold text-signal hover:underline uppercase tracking-wider">Deploy &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 03 -->
+        <div class="tilt-card-wrapper min-w-[88%] sm:min-w-[450px] lg:min-w-[500px] snap-start">
+          <div class="tilt-card editorial-card rounded-xl overflow-hidden h-full flex flex-col justify-between p-1.5">
+            <div class="relative h-60 rounded-lg overflow-hidden bg-amethyst-deep">
+              <img
+                src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1000&q=85"
+                alt="Cinematic 3D Product Visualization"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-amethyst/90 via-amethyst/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded bg-signal text-white font-mono text-[11px] font-semibold">CAPABILITY // 03</span>
+                <span class="px-2.5 py-1 rounded bg-white/95 text-amethyst font-mono text-[11px] font-semibold">SPATIAL-3D</span>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between font-mono text-[11px] text-beige">
+                <span>RENDER: RAY-TRACED 8K</span>
+                <span>ENGINE: UNREAL / WEBGL</span>
+              </div>
+            </div>
+
+            <div class="tilt-card-inner p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-2xl text-amethyst">
+                  Cinematic 3D Product Visualization
+                </h3>
+                <p class="mt-3 text-amethyst/80 text-sm sm:text-base leading-relaxed">
+                  Luxury-grade 3D product reveals, interactive digital twins, and exploded architectural cutaways engineered for product launches and investor presentations.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-amethyst/15 flex items-center justify-between">
+                <span class="font-mono text-xs text-amethyst/75 font-medium">Blender &bull; Unreal 5 &bull; Three.js</span>
+                <a href="#intake-form" class="font-mono text-xs font-bold text-signal hover:underline uppercase tracking-wider">Deploy &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 04 -->
+        <div class="tilt-card-wrapper min-w-[88%] sm:min-w-[450px] lg:min-w-[500px] snap-start">
+          <div class="tilt-card editorial-card rounded-xl overflow-hidden h-full flex flex-col justify-between p-1.5">
+            <div class="relative h-60 rounded-lg overflow-hidden bg-amethyst-deep">
+              <img
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85"
+                alt="Enterprise Brand Transformation & Retail Recovery"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-amethyst/90 via-amethyst/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded bg-signal text-white font-mono text-[11px] font-semibold">CAPABILITY // 04</span>
+                <span class="px-2.5 py-1 rounded bg-white/95 text-amethyst font-mono text-[11px] font-semibold">RETAIL-TURNAROUND</span>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between font-mono text-[11px] text-beige">
+                <span>SCOPE: FULL MODERNIZATION</span>
+                <span>SECTOR: RETAIL &amp; VENTURES</span>
+              </div>
+            </div>
+
+            <div class="tilt-card-inner p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-2xl text-amethyst">
+                  Enterprise Brand Transformation &amp; Retail Recovery
+                </h3>
+                <p class="mt-3 text-amethyst/80 text-sm sm:text-base leading-relaxed">
+                  Strategic turnaround architecture for physical retail stores and emerging startups—combining visual re-branding, digital commerce pipelines, and operational growth systems.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-amethyst/15 flex items-center justify-between">
+                <span class="font-mono text-xs text-amethyst/75 font-medium">Brand Systems &bull; Retail Ops &bull; Growth</span>
+                <a href="#intake-form" class="font-mono text-xs font-bold text-signal hover:underline uppercase tracking-wider">Deploy &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Progress Indicator Dots -->
+      <div class="mt-6 flex items-center justify-center gap-2.5">
+        <button type="button" data-slide="0" class="showcase-dot w-8 h-2 rounded-full bg-signal transition-all" aria-label="Slide 1"></button>
+        <button type="button" data-slide="1" class="showcase-dot w-3 h-2 rounded-full bg-amethyst/25 hover:bg-amethyst/50 transition-all" aria-label="Slide 2"></button>
+        <button type="button" data-slide="2" class="showcase-dot w-3 h-2 rounded-full bg-amethyst/25 hover:bg-amethyst/50 transition-all" aria-label="Slide 3"></button>
+        <button type="button" data-slide="3" class="showcase-dot w-3 h-2 rounded-full bg-amethyst/25 hover:bg-amethyst/50 transition-all" aria-label="Slide 4"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       5. EXECUTIVE LEADERSHIP
+       ===================================================================== -->
+  <section id="leadership" class="relative py-24 lg:py-32 bg-beige border-b border-amethyst/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Heading -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amethyst text-beige font-mono text-xs uppercase tracking-[0.2em] mb-4">
+          <span class="w-2 h-2 rounded-full bg-signal"></span>
+          <span>Executive Governance</span>
+        </div>
+        <h2 class="font-display font-bold text-3xl sm:text-5xl text-amethyst tracking-tight">
+          Executive Leadership
+        </h2>
+        <p class="mt-4 text-amethyst/80 text-base sm:text-lg">
+          Guided by interdisciplinary mastery in Artificial Intelligence, Data Analytics, Electronics &amp; Communication Science, and Corporate Law.
+        </p>
+      </div>
+
+      <!-- Founders Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        
+        <!-- Profile 1: John Stewart -->
+        <div class="editorial-card rounded-xl p-7 sm:p-9 flex flex-col justify-between relative overflow-hidden group">
+          <div class="absolute top-0 left-0 right-0 h-1.5 bg-amethyst"></div>
+
+          <div>
+            <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center pb-7 border-b border-amethyst/15">
+              <!-- Portrait Frame with #3B0A6B Border and #E10600 Badge -->
+              <div class="relative w-28 h-32 sm:w-32 sm:h-36 rounded-lg border-2 border-amethyst bg-beige-soft overflow-hidden shrink-0 shadow-md flex flex-col items-center justify-center p-3">
+                <img
+                  src="./logo.png"
+                  alt="John Stewart Emblem"
+                  class="w-16 h-12 object-contain logo-blend-light opacity-90 mb-2"
+                />
+                <span class="font-display font-bold text-xs text-amethyst tracking-wider">J. STEWART</span>
+                <span class="font-mono text-[9px] text-amethyst/65">CHAIRMAN &amp; CEO</span>
+                <!-- #E10600 Badge -->
+                <div class="absolute top-0 right-0 bg-signal text-white font-mono text-[9px] font-bold uppercase px-2 py-0.5 tracking-wider">
+                  FOUNDER
+                </div>
+              </div>
+
+              <!-- Name & Title -->
+              <div>
+                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-signal text-white font-mono text-[10px] font-semibold uppercase tracking-wider mb-2">
+                  <span>Executive Chair &amp; CEO</span>
+                </div>
+                <h3 class="font-display font-bold text-2xl sm:text-3xl text-amethyst tracking-tight">
+                  John Stewart
+                </h3>
+                <p class="text-amethyst font-semibold text-sm sm:text-base mt-1">
+                  Founder, Chairman &amp; Chief Executive Officer (CEO)
+                </p>
+                <p class="font-mono text-xs text-amethyst/70 mt-1">
+                  Steve Industries — A John Stewart Company
+                </p>
+              </div>
+            </div>
+
+            <!-- Academic Background -->
+            <div class="mt-7 space-y-4">
+              <div class="font-mono text-xs uppercase tracking-widest text-amethyst font-semibold flex items-center gap-2">
+                <i data-lucide="graduation-cap" class="w-4 h-4 text-signal"></i>
+                <span>Academic Background</span>
+              </div>
+
+              <div class="p-4 rounded-lg bg-beige/75 border border-amethyst/20 space-y-3">
+                <div class="flex items-start gap-3">
+                  <span class="w-2 h-2 rounded-full bg-signal mt-2 shrink-0"></span>
+                  <div>
+                    <div class="text-amethyst font-bold text-sm sm:text-base">
+                      M.Sc. in Artificial Intelligence &amp; Data Analytics
+                    </div>
+                    <div class="font-mono text-xs text-amethyst/75 mt-0.5">
+                      Hindustan Institute of Technology &amp; Science
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t border-amethyst/10 pt-3 flex items-start gap-3">
+                  <span class="w-2 h-2 rounded-full bg-amethyst mt-2 shrink-0"></span>
+                  <div>
+                    <div class="text-amethyst font-bold text-sm sm:text-base">
+                      B.Sc. in Electronics &amp; Communication Science
+                    </div>
+                    <div class="font-mono text-xs text-amethyst/75 mt-0.5">
+                      SRM Arts &amp; Science College
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-amethyst/80 text-sm leading-relaxed">
+                Architects the technological and commercial mandate of Steve Industries and the John Stewart Company—leading R&amp;D across autonomous systems, spatial 3D visualization, and high-growth enterprise turnarounds.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-7 pt-4 border-t border-amethyst/15 flex items-center justify-between font-mono text-xs text-amethyst/70">
+            <span>ID // EXEC_CHAIRMAN_01</span>
+            <span class="font-semibold text-amethyst">OFFICE OF THE CEO</span>
+          </div>
+        </div>
+
+        <!-- Profile 2: Naveen N -->
+        <div class="editorial-card rounded-xl p-7 sm:p-9 flex flex-col justify-between relative overflow-hidden group">
+          <div class="absolute top-0 left-0 right-0 h-1.5 bg-amethyst"></div>
+
+          <div>
+            <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center pb-7 border-b border-amethyst/15">
+              <!-- Portrait Frame with #3B0A6B Border and #E10600 Badge -->
+              <div class="relative w-28 h-32 sm:w-32 sm:h-36 rounded-lg border-2 border-amethyst bg-beige-soft overflow-hidden shrink-0 shadow-md flex flex-col items-center justify-center p-3">
+                <img
+                  src="./logo.png"
+                  alt="Naveen N Emblem"
+                  class="w-16 h-12 object-contain logo-blend-light opacity-90 mb-2"
+                />
+                <span class="font-display font-bold text-xs text-amethyst tracking-wider">NAVEEN N</span>
+                <span class="font-mono text-[9px] text-amethyst/65">CLO &amp; COUNSEL</span>
+                <!-- #E10600 Badge -->
+                <div class="absolute top-0 right-0 bg-signal text-white font-mono text-[9px] font-bold uppercase px-2 py-0.5 tracking-wider">
+                  CLO
+                </div>
+              </div>
+
+              <!-- Name & Title -->
+              <div>
+                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-signal text-white font-mono text-[10px] font-semibold uppercase tracking-wider mb-2">
+                  <span>Legal &amp; Regulatory Command</span>
+                </div>
+                <h3 class="font-display font-bold text-2xl sm:text-3xl text-amethyst tracking-tight">
+                  Naveen N
+                </h3>
+                <p class="text-amethyst font-semibold text-sm sm:text-base mt-1">
+                  Chief Legal Officer (CLO) &amp; General Counsel
+                </p>
+                <p class="font-mono text-xs text-amethyst/70 mt-1">
+                  Steve Industries — A John Stewart Company
+                </p>
+              </div>
+            </div>
+
+            <!-- Academic Background -->
+            <div class="mt-7 space-y-4">
+              <div class="font-mono text-xs uppercase tracking-widest text-amethyst font-semibold flex items-center gap-2">
+                <i data-lucide="graduation-cap" class="w-4 h-4 text-signal"></i>
+                <span>Academic Background</span>
+              </div>
+
+              <div class="p-4 rounded-lg bg-beige/75 border border-amethyst/20 space-y-3">
+                <div class="flex items-start gap-3">
+                  <span class="w-2 h-2 rounded-full bg-signal mt-2 shrink-0"></span>
+                  <div>
+                    <div class="text-amethyst font-bold text-sm sm:text-base">
+                      M.Sc. in Artificial Intelligence &amp; Data Analytics
+                    </div>
+                    <div class="font-mono text-xs text-amethyst/75 mt-0.5">
+                      Hindustan Institute of Technology &amp; Science
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t border-amethyst/10 pt-3 flex items-start gap-3">
+                  <span class="w-2 h-2 rounded-full bg-amethyst mt-2 shrink-0"></span>
+                  <div>
+                    <div class="text-amethyst font-bold text-sm sm:text-base">
+                      B.Sc. in Electronics &amp; Communication Science
+                    </div>
+                    <div class="font-mono text-xs text-amethyst/75 mt-0.5">
+                      SRM Arts &amp; Science College
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-amethyst/80 text-sm leading-relaxed">
+                Oversees corporate governance, intellectual property architecture, AI ethics &amp; regulatory compliance, and commercial contract structuring across all enterprise and advisory mandates.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-7 pt-4 border-t border-amethyst/15 flex items-center justify-between font-mono text-xs text-amethyst/70">
+            <span>ID // EXEC_COUNSEL_02</span>
+            <span class="font-semibold text-amethyst">OFFICE OF GENERAL COUNSEL</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       6. DIRECT INTAKE FORM (LIVE EMAIL BACKEND VIA FORMSUBMIT)
+       ===================================================================== -->
+  <section id="intake-form" class="relative py-24 lg:py-32 bg-beige">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left Column: Context & Direct Coordinates (5 Cols) -->
+        <div class="lg:col-span-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amethyst text-beige font-mono text-xs uppercase tracking-[0.2em] mb-4">
+            <span class="w-2 h-2 rounded-full bg-signal"></span>
+            <span>Direct Advisory Dispatch</span>
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-amethyst tracking-tight leading-tight">
+            Initiate a Project or Strategic Audit
+          </h2>
+          <p class="mt-4 text-amethyst/80 text-base sm:text-lg leading-relaxed">
+            Direct communication channel for startups, industrial R&amp;D inquiries, 3D spatial commissions, and retail or enterprise revitalization.
+          </p>
+
+          <!-- Executive Coordinates Card -->
+          <div class="mt-8 editorial-card rounded-xl p-6 space-y-5">
+            <div class="flex items-center justify-between border-b border-amethyst/15 pb-3">
+              <div class="flex items-center gap-2.5">
+                <img src="./logo.png" alt="Logo" class="w-8 h-6 object-contain logo-blend-light" />
+                <span class="font-mono text-xs uppercase tracking-widest text-amethyst font-bold">Executive Desk</span>
+              </div>
+              <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-signal font-semibold">
+                <span class="w-2 h-2 rounded-full bg-signal animate-ping"></span>LIVE DISPATCH
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-lg bg-amethyst text-white flex items-center justify-center shrink-0">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="font-mono text-[11px] uppercase tracking-wider text-amethyst/70">Executive Email</div>
+                <a href="mailto:steveatwork77@gmail.com" class="font-mono text-sm sm:text-base font-semibold text-amethyst hover:text-signal transition-colors break-all">
+                  steveatwork77@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-lg bg-amethyst text-white flex items-center justify-center shrink-0">
+                <i data-lucide="phone-call" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="font-mono text-[11px] uppercase tracking-wider text-amethyst/70">Direct Executive Lines</div>
+                <div class="font-mono text-sm sm:text-base font-semibold text-amethyst space-y-0.5 mt-0.5">
+                  <div><a href="tel:+917338742831" class="hover:text-signal transition-colors">+91 733 874 2831</a></div>
+                  <div><a href="tel:+919095416667" class="hover:text-signal transition-colors">+91 909 541 6667</a></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-lg bg-amethyst text-white flex items-center justify-center shrink-0">
+                <i data-lucide="globe" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="font-mono text-[11px] uppercase tracking-wider text-amethyst/70">Canonical Domain</div>
+                <span class="font-mono text-sm sm:text-base font-semibold text-amethyst">steveindustries.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Live FormSubmit Form (7 Cols) -->
+        <div class="lg:col-span-7">
+          <div class="editorial-card rounded-xl p-8 sm:p-10 relative overflow-hidden">
+            <div class="flex items-center justify-between pb-5 mb-6 border-b border-amethyst/15">
+              <div class="font-mono text-xs text-amethyst font-bold uppercase tracking-widest">
+                INTAKE PROTOCOL // STEVE INDUSTRIES
+              </div>
+              <div class="font-mono text-xs text-signal font-semibold">
+                LIVE EMAIL BACKEND
+              </div>
+            </div>
+
+            <form
+              id="consultation-form"
+              action="https://formsubmit.co/steveatwork77@gmail.com"
+              method="POST"
+              class="space-y-6"
+            >
+              <!-- FormSubmit Configuration Fields -->
+              <input type="hidden" name="_subject" value="New Executive Consultation Inquiry — Steve Industries" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Name -->
                 <div>
-                    <div class="flex items-center gap-4 mb-8">
-                        <svg class="w-12 h-12 text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="miter">
-                            <path d="M20,50 L50,20 L80,50 L50,80 Z" />
-                            <path d="M35,35 L65,65" />
-                            <path d="M65,35 L35,65" />
-                            <rect x="25" y="25" width="50" height="50" transform="rotate(45 50 50)" />
-                        </svg>
-                        <div>
-                            <h2 class="text-3xl font-extrabold tracking-tight">JOHN STEWART</h2>
-                            <p class="text-brand-accent font-semibold tracking-[0.2em] uppercase text-sm mt-1">Company</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 max-w-md text-lg font-light leading-relaxed">
-                        Tech of Future. <br>
-                        Ready to elevate your startup or store with comprehensive engineering and design? Connect with us directly.
-                    </p>
+                  <label for="name" class="block font-mono text-xs uppercase tracking-wider text-amethyst font-semibold mb-2">
+                    Name <span class="text-signal">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Enter your full name"
+                    class="w-full px-4 py-3.5 rounded-lg bg-beige/60 border-1.5 border border-amethyst/35 text-amethyst placeholder-amethyst/45 text-sm font-medium focus:outline-none focus:bg-white focus:border-amethyst focus:ring-2 focus:ring-amethyst/20 transition-all"
+                  />
                 </div>
-                
-                <!-- Contact Info Col -->
-                <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm">
-                    <h3 class="text-xl font-bold mb-6 border-b border-white/10 pb-4">Contact Information</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-brand-accent/20 rounded-lg text-brand-accent">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-400 mb-1">Email</p>
-                                <a href="mailto:steveatwork77@gmail.com" class="text-lg font-medium hover:text-brand-accent transition-colors">steveatwork77@gmail.com</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-brand-accent/20 rounded-lg text-brand-accent">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-400 mb-1">Phone</p>
-                                <p class="text-lg font-medium">+91 733 874 2831</p>
-                                <p class="text-lg font-medium">+91 909 541 6667</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-brand-accent/20 rounded-lg text-brand-accent">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-400 mb-1">Website</p>
-                                <a href="https://reallygreatsite.com" target="_blank" class="text-lg font-medium hover:text-brand-accent transition-colors">reallygreatsite.com</a>
-                            </div>
-                        </div>
-                    </div>
+
+                <!-- Email Address -->
+                <div>
+                  <label for="email" class="block font-mono text-xs uppercase tracking-wider text-amethyst font-semibold mb-2">
+                    Email Address <span class="text-signal">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="name@company.com"
+                    class="w-full px-4 py-3.5 rounded-lg bg-beige/60 border border-amethyst/35 text-amethyst placeholder-amethyst/45 text-sm font-medium focus:outline-none focus:bg-white focus:border-amethyst focus:ring-2 focus:ring-amethyst/20 transition-all"
+                  />
                 </div>
-            </div>
-            
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                <p>&copy; <span id="year"></span> John Stewart Company. Founder & CEO: John Stewart.</p>
-                <div class="mt-4 md:mt-0 flex gap-4">
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+              </div>
+
+              <!-- Phone Number -->
+              <div>
+                <label for="phone" class="block font-mono text-xs uppercase tracking-wider text-amethyst font-semibold mb-2">
+                  Phone Number <span class="text-signal">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="+91 98765 43210"
+                  class="w-full px-4 py-3.5 rounded-lg bg-beige/60 border border-amethyst/35 text-amethyst placeholder-amethyst/45 text-sm font-medium focus:outline-none focus:bg-white focus:border-amethyst focus:ring-2 focus:ring-amethyst/20 transition-all"
+                />
+              </div>
+
+              <!-- Pillar Selection -->
+              <div>
+                <span class="block font-mono text-xs uppercase tracking-wider text-amethyst font-semibold mb-2">
+                  Engagement Pillar
+                </span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="pillar" value="Frontier Engineering & R&D" class="peer sr-only" checked />
+                    <span class="block text-center font-mono text-xs px-3 py-2.5 rounded-md border border-amethyst/30 bg-beige/50 text-amethyst peer-checked:border-amethyst peer-checked:bg-amethyst peer-checked:text-white font-semibold transition-all">
+                      Frontier AI &amp; R&amp;D
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="pillar" value="Spatial 3D Engineering" class="peer sr-only" />
+                    <span class="block text-center font-mono text-xs px-3 py-2.5 rounded-md border border-amethyst/30 bg-beige/50 text-amethyst peer-checked:border-amethyst peer-checked:bg-amethyst peer-checked:text-white font-semibold transition-all">
+                      Spatial 3D
+                    </span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="pillar" value="Venture Modernization & Advisory" class="peer sr-only" />
+                    <span class="block text-center font-mono text-xs px-3 py-2.5 rounded-md border border-amethyst/30 bg-beige/50 text-amethyst peer-checked:border-amethyst peer-checked:bg-amethyst peer-checked:text-white font-semibold transition-all">
+                      Venture &amp; Retail
+                    </span>
+                  </label>
                 </div>
-            </div>
+              </div>
+
+              <!-- Requirement Overview -->
+              <div>
+                <label for="message" class="block font-mono text-xs uppercase tracking-wider text-amethyst font-semibold mb-2">
+                  Requirement Overview <span class="text-signal">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Outline your project goals, technical scope, 3D visualization needs, or business turnaround objectives..."
+                  class="w-full px-4 py-3.5 rounded-lg bg-beige/60 border border-amethyst/35 text-amethyst placeholder-amethyst/45 text-sm font-medium focus:outline-none focus:bg-white focus:border-amethyst focus:ring-2 focus:ring-amethyst/20 transition-all resize-y"
+                ></textarea>
+              </div>
+
+              <!-- Signal Red Submit Button (#E10600) -->
+              <div class="pt-2">
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="w-full inline-flex items-center justify-center gap-3 bg-signal hover:bg-signal-hover text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider px-8 py-4 rounded-lg shadow-signal-cta hover:shadow-signal-cta-hover transition-all duration-200 active:scale-[0.99]"
+                >
+                  <span id="submit-btn-text">Submit Consultation Brief</span>
+                  <i data-lucide="send" class="w-5 h-5"></i>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-    </section>
 
-    <!-- Scripts -->
-    <script>
-        // Set dynamic year
-        document.getElementById('year').textContent = new Date().getFullYear();
+      </div>
+    </div>
+  </section>
 
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+  <!-- =====================================================================
+       7. EXECUTIVE CONTACT & FOOTER (DEEP ROYAL AMETHYST #3B0A6B)
+       ===================================================================== -->
+  <footer id="contact" class="bg-amethyst text-beige pt-16 pb-12 border-t-4 border-signal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-beige/20">
         
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-        
-        // Close menu on link click
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
+        <!-- Brand Lockup with Uploaded Logo for Both Companies (5 Cols) -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-14 flex items-center justify-center rounded-xl bg-white border-2 border-beige/40 p-1.5 shadow-md shrink-0">
+              <img
+                src="./logo.png"
+                alt="Steve Industries & John Stewart Company Primary Emblem"
+                class="w-full h-full object-contain logo-blend-light scale-125"
+              />
+            </div>
+            <div>
+              <div class="font-display font-bold text-xl sm:text-2xl text-white tracking-wider">
+                STEVE INDUSTRIES
+              </div>
+              <div class="font-mono text-xs uppercase tracking-[0.2em] text-beige/80 mt-0.5">
+                A John Stewart Company
+              </div>
+            </div>
+          </div>
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
+          <p class="font-display italic text-lg text-white">
+            &ldquo;Intelligent Solutions. Infinite Dimensions.&rdquo;
+          </p>
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-visible');
-                    entry.target.classList.remove('animate-hidden');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+          <p class="text-sm text-beige/80 leading-relaxed max-w-md">
+            Operating enterprise under the <strong class="text-white">John Stewart Company</strong>—delivering frontier AI &amp; robotics engineering, photorealistic 3D spatial visualization, and commercial venture &amp; retail modernization.
+          </p>
+        </div>
 
-        document.querySelectorAll('.scroll-reveal').forEach((elem) => {
-            observer.observe(elem);
-        });
+        <!-- Navigation Links (3 Cols) -->
+        <div class="lg:col-span-3 space-y-3">
+          <div class="font-mono text-xs uppercase tracking-widest text-white font-semibold">Enterprise Navigation</div>
+          <ul class="space-y-2.5 text-sm text-beige/85">
+            <li><a href="#hero" class="hover:text-white transition-colors">Interactive 3D Stage</a></li>
+            <li><a href="#ecosystem" class="hover:text-white transition-colors">Corporate Ecosystem</a></li>
+            <li><a href="#pillars" class="hover:text-white transition-colors">Core Pillars (Build &rarr; Scale)</a></li>
+            <li><a href="#showcase" class="hover:text-white transition-colors">3D Card Showcase</a></li>
+            <li><a href="#leadership" class="hover:text-white transition-colors">Executive Leadership</a></li>
+            <li><a href="#intake-form" class="text-white font-semibold hover:underline">Initiate Consultation &rarr;</a></li>
+          </ul>
+        </div>
 
-        // Three.js Integration for Hero Section
-        window.onload = function() {
-            initThreeJS();
-        };
+        <!-- Executive Coordinates (4 Cols) -->
+        <div class="lg:col-span-4 space-y-3">
+          <div class="font-mono text-xs uppercase tracking-widest text-white font-semibold">Executive Coordinates</div>
+          <div class="space-y-3 font-mono text-xs sm:text-sm text-beige/90">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-signal shrink-0"></i>
+              <a href="mailto:steveatwork77@gmail.com" class="hover:text-white transition-colors break-all">
+                steveatwork77@gmail.com
+              </a>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-signal shrink-0"></i>
+              <div class="space-x-1">
+                <a href="tel:+917338742831" class="hover:text-white transition-colors">+91 733 874 2831</a>
+                <span class="text-beige/40">|</span>
+                <a href="tel:+919095416667" class="hover:text-white transition-colors">+91 909 541 6667</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="globe" class="w-4 h-4 text-signal shrink-0"></i>
+              <a href="https://steveindustries.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                steveindustries.com
+              </a>
+            </div>
+          </div>
+        </div>
 
-        function initThreeJS() {
-            const canvasContainer = document.getElementById('hero-canvas-container');
-            const canvas = document.getElementById('hero-canvas');
-            
-            // Scene setup
-            const scene = new THREE.Scene();
-            
-            // Camera setup
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 15;
-            
-            // Renderer setup
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      </div>
 
-            // Create a geometric tech shape (Icosahedron to match geometric branding)
-            const geometry = new THREE.IcosahedronGeometry(8, 1);
-            
-            // Material: Wireframe styling for "tech" feel matching light theme (dark slate color)
-            const material = new THREE.MeshBasicMaterial({ 
-                color: 0x0f172a, // brand-dark
-                wireframe: true,
-                transparent: true,
-                opacity: 0.15
-            });
-            
-            const shape = new THREE.Mesh(geometry, material);
-            scene.add(shape);
-            
-            // Optional secondary shape for complexity
-            const geo2 = new THREE.IcosahedronGeometry(12, 0);
-            const mat2 = new THREE.MeshBasicMaterial({
-                color: 0x2563eb, // brand-accent
-                wireframe: true,
-                transparent: true,
-                opacity: 0.05
-            });
-            const shape2 = new THREE.Mesh(geo2, mat2);
-            scene.add(shape2);
+      <!-- Bottom Copyright Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-beige/75">
+        <div>
+          &copy; <span id="current-year">2026</span> Steve Industries — A John Stewart Company. All rights reserved.
+        </div>
+        <div class="flex items-center gap-6">
+          <span>CANONICAL // STEVEINDUSTRIES.COM</span>
+        </div>
+      </div>
 
-            // Mouse interaction logic
-            let mouseX = 0;
-            let mouseY = 0;
-            let targetX = 0;
-            let targetY = 0;
-            const windowHalfX = window.innerWidth / 2;
-            const windowHalfY = window.innerHeight / 2;
+    </div>
+  </footer>
 
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX - windowHalfX) * 0.001;
-                mouseY = (event.clientY - windowHalfY) * 0.001;
-            });
+  <!-- =====================================================================
+       INTERACTIVE SCRIPTS (THREE.JS STAGE, 3D CARD TILT, CAROUSEL)
+       ===================================================================== -->
+  <script>
+    // 1. Initialize Lucide Icons & Current Year
+    lucide.createIcons();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Animation Loop
-            function animate() {
-                requestAnimationFrame(animate);
+    // 2. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIconOpen = document.getElementById('menu-icon-open');
+    const menuIconClose = document.getElementById('menu-icon-close');
 
-                // Rotate shapes continuously
-                shape.rotation.x += 0.001;
-                shape.rotation.y += 0.002;
-                
-                shape2.rotation.x -= 0.001;
-                shape2.rotation.y -= 0.001;
+    mobileMenuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      menuIconOpen.classList.toggle('hidden', !isHidden);
+      menuIconClose.classList.toggle('hidden', isHidden);
+    });
 
-                // Smoothly follow mouse
-                targetX = mouseX;
-                targetY = mouseY;
-                
-                shape.rotation.x += 0.05 * (targetY - shape.rotation.x);
-                shape.rotation.y += 0.05 * (targetX - shape.rotation.y);
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIconOpen.classList.remove('hidden');
+        menuIconClose.classList.add('hidden');
+      });
+    });
 
-                renderer.render(scene, camera);
-            }
+    // 3. Hero Section Three.js Interactive 3D Stage (#3B0A6B Royal Amethyst & #E10600 Signal Red)
+    (function initThreeStage() {
+      const container = document.getElementById('hero-canvas-container');
+      if (!container || typeof THREE === 'undefined') return;
 
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        55,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 7.4;
 
-            // Start animation loop
-            animate();
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      const masterGroup = new THREE.Group();
+      scene.add(masterGroup);
+
+      // Outer Deep Royal Amethyst (#3B0A6B) Wireframe Icosahedron
+      const outerGeo = new THREE.IcosahedronGeometry(2.75, 1);
+      const outerWireframe = new THREE.WireframeGeometry(outerGeo);
+      const outerMat = new THREE.LineBasicMaterial({
+        color: 0x3B0A6B,
+        transparent: true,
+        opacity: 0.42
+      });
+      const outerMesh = new THREE.LineSegments(outerWireframe, outerMat);
+      masterGroup.add(outerMesh);
+
+      // Inner Signal Red (#E10600) Interlocking Octahedral Core
+      const innerGeo = new THREE.OctahedronGeometry(1.55, 1);
+      const innerWireframe = new THREE.WireframeGeometry(innerGeo);
+      const innerMat = new THREE.LineBasicMaterial({
+        color: 0xE10600,
+        transparent: true,
+        opacity: 0.68
+      });
+      const innerMesh = new THREE.LineSegments(innerWireframe, innerMat);
+      masterGroup.add(innerMesh);
+
+      // Dual Interlocking Geometric Loops (Reflecting the Brand Emblem)
+      const torusGeo = new THREE.TorusGeometry(3.25, 0.02, 16, 80);
+      const torusAmethyst = new THREE.MeshBasicMaterial({
+        color: 0x3B0A6B,
+        transparent: true,
+        opacity: 0.45
+      });
+      const torusRed = new THREE.MeshBasicMaterial({
+        color: 0xE10600,
+        transparent: true,
+        opacity: 0.55
+      });
+
+      const ring1 = new THREE.Mesh(torusGeo, torusAmethyst);
+      ring1.rotation.x = Math.PI / 3;
+      ring1.rotation.y = Math.PI / 6;
+      masterGroup.add(ring1);
+
+      const ring2 = new THREE.Mesh(torusGeo, torusRed);
+      ring2.rotation.x = -Math.PI / 3;
+      ring2.rotation.y = -Math.PI / 6;
+      masterGroup.add(ring2);
+
+      // Ambient Amethyst Spatial Nodes
+      const particleCount = 140;
+      const positions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 16;
+      }
+      const particleGeo = new THREE.BufferGeometry();
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMat = new THREE.PointsMaterial({
+        color: 0x3B0A6B,
+        size: 0.045,
+        transparent: true,
+        opacity: 0.45
+      });
+      const particleField = new THREE.Points(particleGeo, particleMat);
+      scene.add(particleField);
+
+      // Smooth Cursor & Drag Interaction
+      let targetX = 0;
+      let targetY = 0;
+      let isDragging = false;
+      let prevMouseX = 0;
+      let prevMouseY = 0;
+      let manualRotX = 0;
+      let manualRotY = 0;
+      const hudCoords = document.getElementById('hud-coords');
+
+      window.addEventListener('mousemove', (e) => {
+        const normX = (e.clientX / window.innerWidth) * 2 - 1;
+        const normY = -(e.clientY / window.innerHeight) * 2 + 1;
+        targetX = normX * 0.55;
+        targetY = normY * 0.55;
+
+        if (isDragging) {
+          manualRotY += (e.clientX - prevMouseX) * 0.006;
+          manualRotX += (e.clientY - prevMouseY) * 0.006;
+          prevMouseX = e.clientX;
+          prevMouseY = e.clientY;
         }
-    </script>
+
+        if (hudCoords) {
+          hudCoords.textContent = `ORBIT: X:${normX.toFixed(2)} Y:${normY.toFixed(2)}`;
+        }
+      });
+
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        prevMouseX = e.clientX;
+        prevMouseY = e.clientY;
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('resize', () => {
+        if (!container) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+
+      const clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const elapsed = clock.getElapsedTime();
+
+        outerMesh.rotation.y = elapsed * 0.14;
+        outerMesh.rotation.x = elapsed * 0.08;
+
+        innerMesh.rotation.y = -elapsed * 0.24;
+        innerMesh.rotation.z = elapsed * 0.16;
+
+        ring1.rotation.z = elapsed * 0.12;
+        ring2.rotation.z = -elapsed * 0.15;
+
+        particleField.rotation.y = elapsed * 0.025;
+
+        masterGroup.rotation.y += ((targetX + manualRotY) - masterGroup.rotation.y) * 0.06;
+        masterGroup.rotation.x += ((-targetY + manualRotX) - masterGroup.rotation.x) * 0.06;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+
+    // 4. 3D Hover-Tilt Effect on Showcase Cards
+    document.querySelectorAll('.tilt-card-wrapper').forEach(wrapper => {
+      const card = wrapper.querySelector('.tilt-card');
+      if (!card) return;
+
+      wrapper.addEventListener('mousemove', (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -6.5;
+        const rotateY = ((x - centerX) / centerX) * 6.5;
+
+        card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+      });
+
+      wrapper.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+    });
+
+    // 5. Horizontal Carousel Controls
+    const track = document.getElementById('showcase-track');
+    const prevBtn = document.getElementById('slide-prev');
+    const nextBtn = document.getElementById('slide-next');
+    const dots = document.querySelectorAll('.showcase-dot');
+
+    function getSlideWidth() {
+      const firstCard = track.querySelector('.tilt-card-wrapper');
+      return firstCard ? firstCard.offsetWidth + 28 : 480;
+    }
+
+    if (prevBtn && nextBtn && track) {
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+      });
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          track.scrollTo({ left: idx * getSlideWidth(), behavior: 'smooth' });
+        });
+      });
+
+      track.addEventListener('scroll', () => {
+        const activeIdx = Math.round(track.scrollLeft / getSlideWidth());
+        dots.forEach((dot, idx) => {
+          if (idx === activeIdx) {
+            dot.classList.add('w-8', 'bg-signal');
+            dot.classList.remove('w-3', 'bg-amethyst/25');
+          } else {
+            dot.classList.remove('w-8', 'bg-signal');
+            dot.classList.add('w-3', 'bg-amethyst/25');
+          }
+        });
+      });
+    }
+  </script>
 </body>
 </html>
